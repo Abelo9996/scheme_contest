@@ -1,0 +1,121 @@
+;;; Scheme Recursive Art Contest Entry
+;;;
+;;; Please do not include your name or personal info in this file.
+;;;
+;;; Title: <The Sad Story Of FeelsBadMan>
+;;;
+;;; Description:
+;;;   <After a gruesome final examination night,
+;;;    I ponder, "passing CS61A, I might?",
+;;;    whilst drinking Boba with ice that's light.>
+
+(define (shape c1 c2 x1 x2 x3 x4 y1 y2)
+  (color c1)
+  (penup)
+  (goto x1 y2)
+  (begin_fill)
+  (pendown)
+  (goto x2 y1)
+  (goto x3 y1)
+  (goto x4 y2)
+  (goto x1 y2)
+  (end_fill)
+  (color c2)
+  (goto x2 y1)
+  (goto x3 y1)
+  (goto x4 y2)
+  (goto x1 y2))
+
+(define (cup)
+  (shape "#333333" "#333333" -115 60 265 95 -175 -255)
+  (shape "white" "black" -170 -115 95 150 -255 150)
+  (shape "#f2c97c" "black" -155 -110 90 135 -250 100)
+  (shape "#32CD32" "black" 50 -80 -50 80 -247 250)
+  (shape "#DC143C" "#DC143C" -170 -175 155 150 140 150)
+  (shape "#d2a249" "#d2a249" 119 74 89 134 -249 99))
+
+(define (move_boba x)
+  (penup)
+  (goto x -230)
+  (pendown)
+  (boba)
+  (penup)
+  (goto (+ x 20) -200)
+  (pendown)
+  (boba)
+  (penup))
+
+(define (boba)
+  (color "black")
+  (begin_fill)
+  (circle 15)
+  (end_fill))
+
+(define (boba-repeat x y)
+    (penup)
+    (goto x y)
+    (pendown)
+    (boba))
+
+(define (color_gradient height c)
+(begin
+  (define height (* height 0.35))
+  (setposition -550 -350)
+  (color c)
+  (begin_fill)
+  (forward height)
+  (rt 90)
+  (forward 1200)
+  (rt 90)
+  (forward height)
+  (rt 90)
+  (forward 1200)
+  (rt 90)
+  (end_fill)
+  )
+)
+
+(define (draw)
+  (color_gradient 3440 "#efeeeb")
+  (color_gradient 2430 "#f0eee7")
+  (color_gradient 1330 "#f0eee4")
+  (color_gradient 1040 "#f1efe1")
+  (color_gradient 870 "#f2efdd")
+
+  (color_gradient 650 "#f5f0d0")
+  (color_gradient 520 "#f6f0cd")
+  (color_gradient 500 "#f6f0c9")
+  (color_gradient 390 "#f7f0c6")
+  (color_gradient 480 "#e0e0e0")  
+  (color_gradient 400 "#d2d2d2")
+  (color_gradient 320 "#c4c4c4")
+  (color_gradient 240 "#b5b5b5")
+  (color_gradient 160 "#a7a7a7")
+  (color_gradient 80 "#999999")
+  (color_gradient 0 "#8b8b8b")
+  (color_gradient -80 "#7d7d7d")
+  (color_gradient -160 "#6e6e6e")
+  (color_gradient -240 "#606060")
+  (color_gradient -320 "#525252")
+  (color_gradient -400 "#999999")
+  (color_gradient -500 "#8b8b8b")
+  (cup)
+  (map move_boba (list -68 -33 2 37 72))
+    (boba-repeat -13 -100)
+    (boba-repeat -83 -200)
+    (boba-repeat 9 -20)
+    (boba-repeat 31 60)
+    (boba-repeat 60 170)
+   (boba-repeat -90 -165)
+   (boba-repeat -50 -165)
+   (boba-repeat -10 -165)
+   (boba-repeat 30 -165)
+   (boba-repeat 70 -165)
+   (boba-repeat 103 -165)
+
+   (hideturtle)
+  (exitonclick))
+
+; Please leave this last line alone.  You may add additional procedures above
+; this line.
+(draw)
